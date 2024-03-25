@@ -1,5 +1,12 @@
-import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native"
-import { Feather } from "@expo/vector-icons"
+import {
+  FlatList,
+  ImageBackground,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+} from "react-native"
+import ListItem from "../components/ListItem"
 
 // @DEV: DUMMY DATA
 const DATA = [
@@ -20,31 +27,31 @@ const DATA = [
   },
 ]
 
-const Item = (props) => {
-  const { dt_txt, min, max, condition } = props
-  return (
-    <View style={styles.item}>
-      <Feather name={"sun"} size={50} color={"white"} />
-      <Text style={styles.date}>{dt_txt}</Text>
-      <Text style={styles.temp}>{min}</Text>
-      <Text style={styles.temp}>{max}</Text>
-    </View>
-  )
-}
-
 const UpcomingWeather = () => {
   const renderItem = ({ item }) => (
-    <Item
+    <ListItem
       condition={item.weather[0].main}
       dt_txt={item.dt}
       min={item.main.temp_min}
       max={item.main.temp_max}
     />
   )
+
+  const { container, image } = styles
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={container}>
       <Text>Upcoming Weather</Text>
-      <FlatList data={DATA} renderItem={renderItem} keyExtractor={item => item.dt}/>
+      <ImageBackground
+        source={require("../../assets/clouds.jpg")}
+        style={image}
+      >
+        <FlatList
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.dt}
+        />
+      </ImageBackground>
     </SafeAreaView>
   )
 }
@@ -52,27 +59,30 @@ const UpcomingWeather = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "red",
-    marginTop: StatusBar.currentHeight || 0
+    backgroundColor: "royalblue",
+    marginTop: StatusBar.currentHeight || 0,
   },
   date: {
-    color: 'white',
-    fontSize: 15
+    color: "white",
+    fontSize: 15,
+  },
+  image: {
+    flex: 1,
   },
   item: {
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
-    flexDirection: 'row',
+    flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: 'center',
+    alignItems: "center",
     borderWidth: 5,
-    backgroundColor: 'pink'
+    backgroundColor: "pink",
   },
   temp: {
-    color: 'white',
-    fontSize: 20
-  }
+    color: "white",
+    fontSize: 20,
+  },
 })
 
 export default UpcomingWeather

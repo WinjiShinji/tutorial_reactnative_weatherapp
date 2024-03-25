@@ -1,20 +1,20 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import CurrentWeather from './src/components/CurrentWeather'
-import UpcomingWeather from './src/components/UpcomingWeather'
+import { StyleSheet, View, StatusBar } from 'react-native'
+import City from './src/screens/City'
+
 
 const App = () => {
   return (
     <View style={styles.container}>
-      {/* <CurrentWeather /> */}
-      <UpcomingWeather />
+      <City />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
   }
 })
 
