@@ -1,21 +1,13 @@
-import React from 'react'
-import { StyleSheet, View, StatusBar } from 'react-native'
-import City from './src/screens/City'
-
+import React from "react"
+import { NavigationContainer } from "@react-navigation/native"
+import Tabs from "./src/components/Tabs"
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <City />
-    </View>
+    <NavigationContainer>
+      <Tabs />
+    </NavigationContainer>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  }
-})
 
 export default App

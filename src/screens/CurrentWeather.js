@@ -1,61 +1,79 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native"
-import { Feather } from '@expo/vector-icons';
+import { Feather } from "@expo/vector-icons"
+import RowText from "../components/RowText"
 
 export default function CurrentWeather() {
+  const {
+    wrapper,
+    container,
+    temp,
+    feels,
+    highLow,
+    highLowWrapper,
+    description,
+    message,
+    bodyWrapper,
+  } = styles
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={styles.container}>
+    <SafeAreaView style={wrapper}>
+      <View style={container}>
         <Feather name="sun" size={100} color="black" />
-        <Text style={styles.temp}>6</Text>
-        <Text style={styles.feels}>Feels Like: 5</Text>
-        <View style={styles.highLowWrapper}>
-        <Text style={styles.highLow}>High: 12 </Text>
-        <Text style={styles.highLow}>Low: 4</Text>
-        </View>
+        <Text style={temp}>6</Text>
+        <Text style={feels}>Feels Like: 5</Text>
+        <RowText
+          messageOne={"High: 12 | "}
+          messageTwo={"Low: 4"}
+          messageOneStyles={highLow}
+          messageTwoStyles={highLow}
+          containerStyles={highLowWrapper}
+        />
       </View>
-      <View style={styles.bodyWrapper}>
-        <Text style={styles.description}>Its Sunny</Text>
-        <Text style={styles.message}>Its perfect t-shirt weather</Text>
-      </View>
+      <RowText
+        messageOne={"Its Sunny"}
+        messageTwo={"Its perfect t-shirt weather"}
+        messageOneStyles={description}
+        messageTwoStyles={message}
+        containerStyles={bodyWrapper}
+      />
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   bodyWrapper: {
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
+    justifyContent: "flex-end",
+    alignItems: "flex-start",
     paddingLeft: 25,
-    marginBottom: 40
+    marginBottom: 40,
   },
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   description: {
-    fontSize: 48
+    fontSize: 48,
   },
   feels: {
     fontSize: 30,
-    color: "black"
+    color: "black",
   },
   highLow: {
     fontSize: 20,
-    color: "black"
+    color: "black",
   },
   highLowWrapper: {
-    flexDirection: 'row'
+    flexDirection: "row",
   },
   message: {
-    fontSize: 30
+    fontSize: 30,
   },
   temp: {
     fontSize: 48,
-    color: "black"
-  },  
+    color: "black",
+  },
   wrapper: {
     flex: 1,
-    backgroundColor: "pink"
-  }
+    backgroundColor: "pink",
+  },
 })
