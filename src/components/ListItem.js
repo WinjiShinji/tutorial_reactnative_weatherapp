@@ -3,13 +3,12 @@ import { Feather } from "react-native-vector-icons"
 
 const ListItem = (props) => {
   const { dt_txt, min, max, condition } = props
-  const { item, date, temp } = styles
   return (
-    <View style={item}>
-      <Feather name={"sun"} size={50} color={"white"} />
-      <Text style={date}>{dt_txt}</Text>
-      <Text style={temp}>{min}</Text>
-      <Text style={temp}>{max}</Text>
+    <View style={styles.item}>
+      <Feather name={condition} size={50} color={"white"} />
+      <Text style={styles.date}>{dt_txt}</Text>
+      <Text style={styles.temp}>{min}</Text>
+      <Text style={styles.temp}>{max}</Text>
     </View>
   )
 }

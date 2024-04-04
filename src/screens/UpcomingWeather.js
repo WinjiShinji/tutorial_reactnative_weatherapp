@@ -2,32 +2,30 @@ import {
   FlatList,
   ImageBackground,
   SafeAreaView,
-  StatusBar,
   StyleSheet,
-  Text,
 } from "react-native"
 import ListItem from "../components/ListItem"
 
 // @DEV: DUMMY DATA
 const DATA = [
   {
-    dt: 1692348976,
-    main: { temp_min: 240.64, temp_max: 273.25 },
-    weather: [{ main: "Rain" }],
+    dt: '08:30 | 01-01-2012',
+    main: { temp_min: 20, temp_max: 27 },
+    weather: [{ main: "umbrella" }],
   },
   {
-    dt: 1692348986,
-    main: { temp_min: 290.64, temp_max: 293.25 },
-    weather: [{ main: "Cloud" }],
+    dt: '08:30 | 02-01-2012',
+    main: { temp_min: 29, temp_max: 30 },
+    weather: [{ main: "cloud" }],
   },
   {
-    dt: 1692348996,
-    main: { temp_min: 300.64, temp_max: 313.25 },
-    weather: [{ main: "Sun" }],
+    dt: '08:30 | 03-01-2012',
+    main: { temp_min: 32, temp_max: 35 },
+    weather: [{ main: "sun" }],
   },
 ]
 
-const UpcomingWeather = () => {
+const UpcomingWeather = ({ weatherData }) => {
   const renderItem = ({ item }) => (
     <ListItem
       condition={item.weather[0].main}
@@ -37,14 +35,11 @@ const UpcomingWeather = () => {
     />
   )
 
-  const { container, image } = styles
-
   return (
-    <SafeAreaView style={container}>
-      <Text>Upcoming Weather</Text>
+    <SafeAreaView style={styles.container}>
       <ImageBackground
         source={require("../../assets/clouds.jpg")}
-        style={image}
+        style={styles.image}
       >
         <FlatList
           data={DATA}

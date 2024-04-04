@@ -1,39 +1,45 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native"
 import { Feather } from "@expo/vector-icons"
 import RowText from "../components/RowText"
+import { weatherType } from "../utilities/weatherType"
 
-export default function CurrentWeather() {
+export default function CurrentWeather({ weatherData }) {
   const {
-    wrapper,
-    container,
-    temp,
-    feels,
-    highLow,
-    highLowWrapper,
-    description,
-    message,
-    bodyWrapper,
-  } = styles
+    main: { temp, feels_like, temp_min, temp_max },
+    weather,
+  } = weatherData
+
+  const weatherCondition = weather[0].main
+
   return (
-    <SafeAreaView style={wrapper}>
-      <View style={container}>
-        <Feather name="sun" size={100} color="black" />
-        <Text style={temp}>6</Text>
-        <Text style={feels}>Feels Like: 5</Text>
+    <SafeAreaView
+      style={[
+        styles.wrapper,
+        { backgroundColor: weatherType[weatherCondition].backgroundColor },
+      ]}
+    >
+      <View style={styles.container}>
+        <Feather
+          name={weatherType[weatherCondition].icon}
+          size={100}
+          color="white"
+        />
+        <Text style={styles.temp}>{`${Math.ceil(temp)}`}</Text>
+        <Text style={styles.feels}>{`Feels like ${Math.ceil(feels_like)}`}</Text>
         <RowText
-          messageOne={"High: 12 | "}
-          messageTwo={"Low: 4"}
-          messageOneStyles={highLow}
-          messageTwoStyles={highLow}
-          containerStyles={highLowWrapper}
+          messageOne={`High: ${Math.ceil(temp_max)} | `}
+          messageTwo={`Low: ${Math.floor(temp_min)}`}
+          messageOneStyles={styles.highLow}
+          messageTwoStyles={styles.highLow}
+          containerStyles={styles.highLowWrapper}
         />
       </View>
       <RowText
-        messageOne={"Its Sunny"}
-        messageTwo={"Its perfect t-shirt weather"}
-        messageOneStyles={description}
-        messageTwoStyles={message}
-        containerStyles={bodyWrapper}
+        messageOne={weather[0].description}
+        messageTwo={weatherType[weatherCondition].message}
+        messageOneStyles={styles.description}
+        messageTwoStyles={styles.message}
+        containerStyles={styles.bodyWrapper}
       />
     </SafeAreaView>
   )
